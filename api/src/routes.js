@@ -12,6 +12,7 @@ routes.get('/supermarkets/:marketId', SupermaketController.indexOne);
 
 //register supermarket
 routes.post('/supermarkets', SupermaketController.store);
+routes.post('/', SupermaketController.test); //test
 
 //update supermarket
 routes.patch('/supermarkets/:marketId', SupermaketController.edit);

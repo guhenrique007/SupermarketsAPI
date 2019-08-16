@@ -9,6 +9,11 @@ module.exports = {
         return  res.json(markets);
     },
 
+    test(req,res){
+        console.log({ ok:true });
+        return res.json(req.body.ok);
+    },
+
     //listar um mercado
     async indexOne(req,res){
         const specificMarket = await Supermarket.findById(req.params.marketId);
@@ -20,19 +25,19 @@ module.exports = {
     async store(req,res){
         const market = await Supermarket.create({
             superMarketName: req.body.superMarketName,
-            superMarketMainImage :"",
-            superMarketAdditionalImages:"",
+            superMarketMainImage: req.body.superMarketMainImage,
+            superMarketAdditionalImages: "",
             superMarketLocation:{
-                street:"",
-                number:"",
-                district:"",
-                zip:"",
-                country:"",
-                city:"",
-                state:""
+                street: req.body.superMarketLocation.street,
+                number: req.body.superMarketLocation.number,
+                district: req.body.superMarketLocation.district,
+                zip: req.body.superMarketLocation.zip,
+                country: req.body.superMarketLocation.country,
+                city: req.body.superMarketLocation.city,
+                state: req.body.superMarketLocation.state
             }, 
-            superMarketDescription:"",
-	        superMarketPhone:""
+            superMarketDescription: req.body.superMarketDescription,
+	        superMarketPhone: req.body.superMarketPhone
         });
 
         console.log('> Supermarket registered: ' + req.body.superMarketName);
@@ -51,7 +56,21 @@ module.exports = {
         const updateMarket = await Supermarket.updateOne(
             {_id: req.params.marketId}, 
             {$set:{
-                superMarketName: req.body.superMarketName
+                superMarketName: req.body.superMarketName,
+                superMarketMainImage: req.body.superMarketMainImage,
+                superMarketDescription: req.body.superMarketDescription,
+                superMarketAdditionalImages: req.body.superMarketAdditionalImages,
+                superMarketLocation:{
+                    street: req.body.superMarketLocation.street,
+                    number: req.body.superMarketLocation.number,
+                    district: req.body.superMarketLocation.district,
+                    zip: req.body.superMarketLocation.zip,
+                    country: req.body.superMarketLocation.country,
+                    city: req.body.superMarketLocation.city,
+                    state: req.body.superMarketLocation.state
+                },
+                superMarketDescription: req.body.superMarketDescription,
+	            superMarketPhone: req.body.superMarketPhone
             }
         });
 
